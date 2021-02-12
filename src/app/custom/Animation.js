@@ -7,12 +7,15 @@ export default class Animation{
         this._positionBtn = document.querySelector('#position-button');
         this._stopBtn = document.querySelector('#stop-button');
         this._tl = gsap.timeline();
-        this.temp = null;
     }
 
+
     scaleAnimation(){
-        this._tl.seek(0);
-        this._tl = gsap.to(this._planets, {scale:0, repeat:-1, duration:1, id: "scaleStagger", stagger: {
+        // this._tl.kill();
+        // this._tl.seek(0);
+        this.stop();
+        // this._tl.clear();
+        this._tl.to(this._planets, {scale:0, repeat:-1, duration:1, id: "scaleStagger", stagger: {
             amount: 1,
             yoyo: true,
             repeat: -1,
@@ -20,8 +23,11 @@ export default class Animation{
     }
 
     positionAnimation(){
-        this._tl.seek(0);
-        this._tl = gsap.to(this._planets, {y: 50,repeat:-1, duration:1, id: "positionStagger", stagger: {
+        // this._tl.kill();
+        // this._tl.seek(0);
+        this.stop();
+        // this._tl.clear();
+        this._tl.to(this._planets, {y: 50,repeat:-1, duration:1, id: "positionStagger", stagger: {
             amount: 1,
             from: 'edges',
             yoyo: true,
@@ -30,7 +36,10 @@ export default class Animation{
     }
 
     stop(){
-        this._tl.pause();
+        // this._tl.kill();
+        this._tl.seek(0);
+        this._tl.clear();
+        // this._tl = this.temp;
         // this._tl.clear();
     }
 
@@ -38,21 +47,21 @@ export default class Animation{
         let isScaleActive = false;
         let isPositionActive = false;
         this._scaleBtn.addEventListener('click', () => {
-            if(isScaleActive == false && isPositionActive == false){
+            // if(isScaleActive == false && isPositionActive == false){
             this.scaleAnimation();
-            isScaleActive = true;
-            }
+            // isScaleActive = true;
+            // }
         });
         this._positionBtn.addEventListener('click', () => {
-            if(isScaleActive == false && isPositionActive == false){
+            // if(isScaleActive == false && isPositionActive == false){
                 this.positionAnimation();
-                isPositionActive = true;
-                }
+                // isPositionActive = true;
+                // }
         });
         this._stopBtn.addEventListener('click', () => {
             this.stop();
-            isScaleActive = false;
-            isPositionActive = false;
+            // isScaleActive = false;
+            // isPositionActive = false;
         });
     }
 }
